@@ -1,5 +1,5 @@
 // Determines if splitString() tests should run
-#define RUN_ALL_TESTS false
+#define RUN_STRING_TESTS false
 
 #include <ctime>
 #include <fstream>
@@ -83,7 +83,7 @@ int main()
     /*-----------------------------------------------------------------------------------------------------------*/
     printSeparator();
 
-#if RUN_ALL_TESTS
+#if RUN_STRING_TESTS
     initialTicks = clock();
     values = splitString(str1);
     duration = clock() - initialTicks;
