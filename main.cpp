@@ -296,7 +296,7 @@ vector<string> splitString(string line)
  *
  * @return Vector of strings
  */
-vector<string> splitString(string line, string delimiter = " ")
+vector<string> splitString(string line, string delimiter)
 {
     size_t position = 0;
     string token;
