@@ -24,54 +24,56 @@ int alternate_get_number_of_cores();
 int get_number_of_cores();
 void getStream(string, ifstream&);
 int myGetNumberOfCores();
-void printSpacer();
+void printSeparator();
 vector<string> splitString(string);
 #pragma endregion
 
 
 int main()
 {
-    clock_t timerStart, timerStop;
+    clock_t initialTicks, duration;
     
     /*-----------------------------------------------------------------------------------------------------------*/
-    printSpacer();
+    printSeparator();
 
     // Time how long it takes to run the function smaller numbers are better
-    timerStart = clock();
+    initialTicks = clock();
     cout << "Cores found: " << alternate_get_number_of_cores() << endl;
-    timerStop = clock() - timerStart;
+    duration = clock() - initialTicks;
 
-    cout << "Time to run alternate_get_number_of_cores(): " << ((double)timerStop / CLOCKS_PER_SEC) << " seconds\n";    
+    // clock() returns a number of cpu ticks, if we divide ticks by CLOCKS_PER_SEC we get a time in seconds
+    cout << "Time to run alternate_get_number_of_cores(): " << ((double)duration / CLOCKS_PER_SEC) << " seconds\n";    
     
     /*-----------------------------------------------------------------------------------------------------------*/
-    printSpacer();
+    printSeparator();
 
-    timerStart = clock();
+    // Get starting number of ticks
+    initialTicks = clock();
     cout << "Cores found: " << get_number_of_cores() << endl;
-    timerStop = clock() - timerStart;
+    duration = clock() - initialTicks;
     
-    cout << "Time to run get_number_of_cores(): " << ((double)timerStop / CLOCKS_PER_SEC) << " seconds\n";
+    cout << "Time to run get_number_of_cores(): " << ((double)duration / CLOCKS_PER_SEC) << " seconds\n";
 
     /*-----------------------------------------------------------------------------------------------------------*/
-    printSpacer();
+    printSeparator();
 
-    timerStart = clock();
+    initialTicks = clock();
     cout << "Cores found: " << myGetNumberOfCores() << endl;
-    timerStop = clock() - timerStart;
+    duration = clock() - initialTicks;
     
-    cout << "Time to run myGetNumberOfCores(): " << ((double)timerStop / CLOCKS_PER_SEC) << " seconds\n";
+    cout << "Time to run myGetNumberOfCores(): " << ((double)duration / CLOCKS_PER_SEC) << " seconds\n";
 
     /*-----------------------------------------------------------------------------------------------------------*/
-    printSpacer();
+    printSeparator();
 
-    timerStart = clock();
+    initialTicks = clock();
     cout << "Cores found: " << alternateGetNumberOfCores() << endl;
-    timerStop = clock() - timerStart;
+    duration = clock() - initialTicks;
 
-    cout << "Time to run alternateGetNumberOfCores(): " << ((double)timerStop / CLOCKS_PER_SEC) << " seconds\n";
+    cout << "Time to run alternateGetNumberOfCores(): " << ((double)duration / CLOCKS_PER_SEC) << " seconds\n";
 
     /*-----------------------------------------------------------------------------------------------------------*/
-    printSpacer();
+    printSeparator();
 
     return 0;
 }
@@ -200,9 +202,12 @@ int myGetNumberOfCores()
     return (stoi(values[2]) + 1);
 }
 
-void printSpacer()
+/*
+ * Print a bunch of dashes to the screen to help separate output into readable blocks
+ */
+void printSeparator()
 {
-    cout << "------------------------------------------------------------\n";
+    cout << "--------------------------------------------------------------\n";
 }
 
 /*
