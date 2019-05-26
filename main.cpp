@@ -1,5 +1,7 @@
-// Determines if splitString() tests should run
+// Determines which tests should run
+#define RUN_CPU_TESTS true
 #define RUN_STRING_TESTS false
+
 
 #include <ctime>
 #include <fstream>
@@ -44,6 +46,7 @@ int main()
     /*-----------------------------------------------------------------------------------------------------------*/
     printSeparator();
 
+#if RUN_CPU_TESTS
     // Time how long it takes to run the function smaller numbers are better
     initialTicks = clock();
     cout << "Cores found: " << alternate_get_number_of_cores() << endl;
@@ -82,6 +85,7 @@ int main()
 
     /*-----------------------------------------------------------------------------------------------------------*/
     printSeparator();
+#endif
 
 #if RUN_STRING_TESTS
     initialTicks = clock();
