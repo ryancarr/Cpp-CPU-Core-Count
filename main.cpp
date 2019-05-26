@@ -1,3 +1,6 @@
+// Determines if splitString() tests should run
+#define RUN_ALL_TESTS false
+
 #include <ctime>
 #include <fstream>
 #include <iostream>
@@ -26,12 +29,17 @@ void getStream(string, ifstream&);
 int myGetNumberOfCores();
 void printSeparator();
 vector<string> splitString(string);
+vector<string> splitString(string, string);
 #pragma endregion
 
 
 int main()
 {
     clock_t initialTicks, duration;
+    string str1 = "This is a string separated by spaces.";
+    string str2 = "This/string/is/separated/by/slashes.";
+    string delimiter = "/";
+    vector<string> values;
     
     /*-----------------------------------------------------------------------------------------------------------*/
     printSeparator();
@@ -74,6 +82,56 @@ int main()
 
     /*-----------------------------------------------------------------------------------------------------------*/
     printSeparator();
+
+#if RUN_ALL_TESTS
+    initialTicks = clock();
+    values = splitString(str1);
+    duration = clock() - initialTicks;
+
+    for(string str : values)
+        cout << str << " ";
+    cout << "\n";
+
+    cout << "Old splitString(): " << ((double)duration / CLOCKS_PER_SEC) << " seconds\n";
+    /*-----------------------------------------------------------------------------------------------------------*/
+    printSeparator();
+
+    initialTicks = clock();
+    values = splitString(str1, " ");
+    duration = clock() - initialTicks;
+
+    for(string str : values)
+        cout << str << " ";
+    cout << "\n";
+
+    cout << "New splitString(): " << ((double)duration / CLOCKS_PER_SEC) << " seconds\n";
+    /*-----------------------------------------------------------------------------------------------------------*/
+    printSeparator();
+
+    initialTicks = clock();
+    values = splitString(str2);
+    duration = clock() - initialTicks;
+
+    for(string str : values)
+        cout << str << " ";
+    cout << "\n";
+
+    cout << "Old splitString(): " << ((double)duration / CLOCKS_PER_SEC) << " seconds\n";
+    /*-----------------------------------------------------------------------------------------------------------*/
+    printSeparator();
+
+    initialTicks = clock();
+    values = splitString(str2, delimiter);
+    duration = clock() - initialTicks;
+
+    for(string str : values)
+        cout << str << " ";
+    cout << "\n";
+
+    cout << "New splitString(): " << ((double)duration / CLOCKS_PER_SEC) << " seconds\n";
+    /*-----------------------------------------------------------------------------------------------------------*/
+    printSeparator();
+#endif
 
     return 0;
 }
@@ -226,6 +284,34 @@ vector<string> splitString(string line)
     // Build vector of strings
     vector<string> values(begin, end);
     
+    return values;
+}
+
+/*
+ * Splits a given string on spaces
+ *
+ * @param line String to be split
+ *
+ * @param delimiter What to split the string on, if no value passed, split on space
+ *
+ * @return Vector of strings
+ */
+vector<string> splitString(string line, string delimiter = " ")
+{
+    size_t position = 0;
+    string token;
+    vector<string> values;
+
+    while ((position = line.find(delimiter)) != string::npos)
+    {
+        token = line.substr(0, position);
+        values.push_back(token);
+        line.erase(0, position + delimiter.length());
+    }
+
+    if(line.size() > 0)
+        values.push_back(line);
+
     return values;
 }
 #pragma endregion
