@@ -1,6 +1,6 @@
 # Cpp-CPU-Core-Count
 
-A quick test written to see which medthod of calculating CPU cores is fastest. I understand that fastest may not always be the best.
+A quick test written to see which method of calculating CPU cores is fastest. I understand that fastest may not always be the best. Added additional tests to time two different SplitString methods. Set #define flags to true to determine which tests will run.
 
 ## To setup and compile
 
